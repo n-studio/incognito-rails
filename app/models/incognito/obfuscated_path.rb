@@ -15,7 +15,7 @@ module Incognito
     end
 
     def incognito_path
-      "/incognito/#{self.uuid}"
+      "/#{Incognito.mount_to}/#{self.uuid}"
     end
   end
 end

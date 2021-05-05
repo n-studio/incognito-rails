@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   incognito_patch :post, to: "posts#update"
   incognito_delete :post, to: "posts#destroy"
 
-  mount Incognito::Engine => "/incognito"
+  mount Incognito::Engine => "/"
 end

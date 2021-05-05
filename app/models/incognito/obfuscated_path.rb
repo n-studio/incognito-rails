@@ -14,7 +14,7 @@ module Incognito
       @path_params ||= Rails.application.routes.recognize_path(self.path, method: self.method)
     end
 
-    def incognito_path
+    def obfuscated_path
       "/#{Incognito.mount_to}/#{self.uuid}"
     end
   end

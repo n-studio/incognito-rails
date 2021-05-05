@@ -1,28 +1,28 @@
 module ActionDispatch
   module Routing
     class Mapper
-      def incognito_get(name, to:)
-        incognito_match(name, method: "GET", to: to)
+      def obfuscate_get(name, to:)
+        obfuscate_match(name, method: "GET", to: to)
       end
 
-      def incognito_post(name, to:)
-        incognito_match(name, method: "POST", to: to)
+      def obfuscate_post(name, to:)
+        obfuscate_match(name, method: "POST", to: to)
       end
 
-      def incognito_put(name, to:)
-        incognito_match(name, method: "PUT", to: to)
+      def obfuscate_put(name, to:)
+        obfuscate_match(name, method: "PUT", to: to)
       end
 
-      def incognito_patch(name, to:)
-        incognito_match(name, method: "PATCH", to: to)
+      def obfuscate_patch(name, to:)
+        obfuscate_match(name, method: "PATCH", to: to)
       end
 
-      def incognito_delete(name, to:)
-        incognito_match(name, method: "DELETE", to: to)
+      def obfuscate_delete(name, to:)
+        obfuscate_match(name, method: "DELETE", to: to)
       end
 
-      def incognito_match(name, method:, to:)
-        Incognito::ApplicationHelper.define_method(:"incognito_#{method.downcase}_#{name}_path") do |*args, **kwargs|
+      def obfuscate_match(name, method:, to:)
+        Incognito::ApplicationHelper.define_method(:"obfuscated_#{method.downcase}_#{name}_path") do |*args, **kwargs|
           session[:incognito_session_uuid] ||= SecureRandom.uuid
           Incognito::ObfuscatedPath.find_or_create_by(
             method: method,
@@ -30,11 +30,11 @@ module ActionDispatch
             session: session[:incognito_session_uuid],
           ) do |path|
             path.expires_at = 1.month.from_now
-          end.incognito_path
+          end.obfuscated_path
         end
 
-        Incognito::ApplicationHelper.define_method(:"incognito_#{method.downcase}_#{name}_url") do |*args, **kwargs|
-          url_for(send(:"incognito_#{method.downcase}_#{name}_path", *args, **kwargs))
+        Incognito::ApplicationHelper.define_method(:"obfuscated_#{method.downcase}_#{name}_url") do |*args, **kwargs|
+          url_for(send(:"obfuscated_#{method.downcase}_#{name}_path", *args, **kwargs))
         end
       end
     end

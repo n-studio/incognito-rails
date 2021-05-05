@@ -24,7 +24,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
-      redirect_to incognito_get_post_url(@post), notice: 'Post was successfully created.'
+      redirect_to obfuscated_get_post_url(@post), notice: 'Post was successfully created.'
     else
       render :new
     end
@@ -33,7 +33,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
-      redirect_to incognito_get_post_url(@post), notice: 'Post was successfully updated.'
+      redirect_to obfuscated_get_post_url(@post), notice: 'Post was successfully updated.'
     else
       render :edit
     end
@@ -42,7 +42,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   def destroy
     @post.destroy
-    redirect_to incognito_get_posts_url, notice: 'Post was successfully destroyed.'
+    redirect_to obfuscated_get_posts_url, notice: 'Post was successfully destroyed.'
   end
 
   private

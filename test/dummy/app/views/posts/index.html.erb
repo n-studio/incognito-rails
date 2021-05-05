@@ -14,9 +14,9 @@
     <% @posts.each do |post| %>
       <tr>
         <td><%= post.content %></td>
-        <td><%= link_to 'Show', incognito_get_post_path(post) %></td>
-        <td><%= link_to 'Edit', incognito_get_edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', incognito_delete_post_path(post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', obfuscated_get_post_path(post) %></td>
+        <td><%= link_to 'Edit', obfuscated_get_edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', obfuscated_delete_post_path(post), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Post', incognito_get_new_post_path %>
+<%= link_to 'New Post', obfuscated_get_new_post_path %>

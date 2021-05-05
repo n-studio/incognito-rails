@@ -4,18 +4,15 @@ I was wondering if it was possible to obfuscate routes in Rails. It turns out yo
 This gem will turn your URLs such as `/posts/2/comments` into `/incognito/7289c460-6d3e-4f1a-81b9-a0d0492648c3`
 
 ## Usage
-In your `routes.rb` file, add `obfuscate_<http_method>` for each path you want to obfuscate and mount the engine.  
-(There might be a way to automize the obfuscation but I'm too lazy to figure out how. Feel free to submit a PR.)
+In your `routes.rb` file, mount the engine and call the `obfuscate` method for each path you want to obfuscate.  
+(There might be a way to automatize the obfuscation but I'm too lazy to figure out how. Feel free to submit a PR.)
 
 ```ruby
-obfuscate_get :posts, to: "posts#index"
-obfuscate_get :post, to: "posts#show"
-obfuscate_get :new_post, to: "posts#new"
-obfuscate_get :edit_post, to: "posts#edit"
-obfuscate_post :posts, to: "posts#create"
-obfuscate_put :post, to: "posts#update"
-obfuscate_patch :post, to: "posts#update"
-obfuscate_delete :post, to: "posts#destroy"
+obfuscate :get, :posts, :post, :new_post, :edit_post
+obfuscate :post, :posts
+obfuscate :put, :post
+obfuscate :patch, :post
+obfuscate :delete, :post
 
 mount Incognito::Engine => "/"
 ```
@@ -23,9 +20,9 @@ mount Incognito::Engine => "/"
 Then in your controllers and views, update your path helpers.
 
 ```ruby
-GET posts_url => obfuscated_get_posts_url
-GET post_url(@post) => obfuscated_get_post_url(@post)
-PATCH post_url(@post) => obfuscated_patch_post_url(@post)
+GET posts_url => posts_url(obfuscate: { method: :get })
+GET post_url(@post) => post_url(@post, obfuscate: { method: :get })
+PATCH post_url(@post) => post_url(@post, obfuscate: { method: :patch })
 ```
 
 You can change the mount location with `Incognito.mount_to = "<your mount path>"`

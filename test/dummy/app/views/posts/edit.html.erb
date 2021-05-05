@@ -2,5 +2,5 @@
 
 <%= render 'form', post: @post %>
 
-<%= link_to 'Show', obfuscated_get_post_path(@post) %> |
-<%= link_to 'Back', obfuscated_get_posts_path %>
+<%= link_to 'Show', post_path(@post, obfuscate: { method: :get }) %> |
+<%= link_to 'Back', posts_path(obfuscate: { method: :get }) %>

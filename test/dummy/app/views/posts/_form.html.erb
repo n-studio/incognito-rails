@@ -1,4 +1,4 @@
-<%= form_with(model: post, url: post.new_record? ? obfuscated_post_posts_path : obfuscated_patch_post_path(post)) do |form| %>
+<%= form_with(model: post, url: post.new_record? ? posts_path(obfuscate: { method: :post }) : post_path(post, obfuscate: { method: :patch })) do |form| %>
   <% if post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>

@@ -15,7 +15,11 @@ module Incognito
     end
 
     def obfuscated_path
-      "/#{Incognito.mount_to}/#{self.uuid}"
+      @obfuscated_path ||= begin
+        mount = Incognito.mount_to
+        mount.prepend("/") unless mount.start_with?("/") || mount.blank?
+        "#{mount}/#{self.uuid}"
+      end
     end
   end
 end

@@ -1,6 +1,8 @@
 require "test_helper"
 
 class PostsControllerTest < ActionDispatch::IntegrationTest
+  include Incognito::ApplicationHelper
+
   setup do
     @post = posts(:one)
   end
@@ -20,7 +22,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
       post posts_url, params: { post: { content: @post.content } }
     end
 
-    assert_redirected_to post_url(Post.last)
+    assert_redirected_to incognito_get_post_url(Post.last)
   end
 
   test "should show post" do
@@ -35,7 +37,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update post" do
     patch post_url(@post), params: { post: { content: @post.content } }
-    assert_redirected_to post_url(@post)
+    assert_redirected_to incognito_get_post_url(@post)
   end
 
   test "should destroy post" do
@@ -43,6 +45,6 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
       delete post_url(@post)
     end
 
-    assert_redirected_to posts_url
+    assert_redirected_to incognito_get_posts_url
   end
 end

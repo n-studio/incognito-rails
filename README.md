@@ -1,4 +1,4 @@
-# Incognito::Rails
+# Incognito
 Short description and motivation.
 
 ## Usage

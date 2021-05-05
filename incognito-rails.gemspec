@@ -1,8 +1,8 @@
-require_relative "lib/incognito/rails/version"
+require_relative "lib/incognito/version"
 
 Gem::Specification.new do |spec|
   spec.name        = "incognito-rails"
-  spec.version     = Incognito::Rails::VERSION
+  spec.version     = Incognito::VERSION
   spec.authors     = ["Matthew Nguyen"]
   spec.email       = ["contact@n-studio.fr"]
   spec.homepage    = "https://github.com/n-studio/incognito-rails"

@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_05_221744) do
+ActiveRecord::Schema.define(version: 2021_05_06_082246) do
+
+  create_table "incognito_obfuscated_paths", force: :cascade do |t|
+    t.string "uuid", null: false
+    t.string "session"
+    t.string "method"
+    t.string "path", null: false
+    t.string "query_string"
+    t.datetime "expires_at"
+    t.index ["expires_at"], name: "index_incognito_obfuscated_paths_on_expires_at"
+    t.index ["session"], name: "index_incognito_obfuscated_paths_on_session"
+    t.index ["uuid"], name: "index_incognito_obfuscated_paths_on_uuid", unique: true
+  end
 
   create_table "posts", force: :cascade do |t|
     t.text "content"

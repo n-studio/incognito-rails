@@ -23,7 +23,7 @@ module ActionDispatch
               path: Rails.application.routes.url_helpers.send(:"#{name}_path", *args, **kwargs),
               session: session[:incognito_session_uuid],
             ) do |path|
-              path.expires_at = 1.month.from_now
+              path.expires_at = Incognito.default_expires_at || 2.days.from_now
             end.obfuscated_path
           end
 

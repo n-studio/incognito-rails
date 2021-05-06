@@ -34,6 +34,10 @@ Incognito.mount_to = "private"
 # => will generate /private/7289c460-6d3e-4f1a-81b9-a0d0492648c3 URLs
 ```
 
+You can change the expiration time with `Incognito.default_expires_at = 2.days.from_now`
+
+You can run the task `bin/rails incognito:cleanup` to delete all expired paths.
+
 ## Installation
 Add this line to your application's Gemfile:
 
